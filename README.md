@@ -1,6 +1,6 @@
 # Test_Runner
 
-Tests every app from one place. It runs Playwright, Cypress, Jest and k6 against an app and keeps every result with its history, so a failure shows how long it has been failing, not just that it failed. It also picks up tasks from MemoPile and reports each one back as Tested or Failed.
+Tests every app from one place. It runs Playwright, Cypress, Jest and k6 against an app and keeps every result with its history, so a failure shows how long it has been failing, not just that it failed. It also picks up tasks from MemoPile and reports each one back as Tested or Failed, and runs evals that score the quality of an app's AI output with an LLM judge.
 
 > **Source code is private.** This repository shows what Test_Runner does and how it is built. The code is available on request.
 
@@ -41,11 +41,12 @@ Real screens; app names and test details are blurred.
 | **All apps**: every app under test with its pass rate, failing tests and a pass-rate sparkline | **Overview**: one app's verdict, last run, failing tests and charts per run |
 | ![Sessions](screenshots/sessions.png) | ![Catalogue](screenshots/catalogue.png) |
 | **Sessions**: every run with results per tool and the evidence behind each test | **Catalogue**: the app's test cases and their lifecycle |
-| ![Test history](screenshots/history.png) | |
-| **Test history**: one test followed across its runs, per tool | |
+| ![Test history](screenshots/history.png) | ![Evals](screenshots/evals.png) |
+| **Test history**: one test followed across its runs, per tool | **Evals**: AI output quality scored 1 to 5 by an LLM judge, per criterion and per run |
 
 ## Highlights
 
+- **Evals**: tests check the app works; evals check how good its AI output is. An LLM judge scores a random sample of real outputs against their source on a rubric per part (for example faithfulness, coverage, specificity), with a one-line reason for every score, and the averages are tracked run over run so a prompt or model change shows up as a number. Any app plugs in with a small config and adapter.
 - **Live view** streams the test browser while Playwright drives the app, and **Replay** steps through a finished test's trace.
 - **Import from spreadsheet**: Claude Code reads any test spreadsheet, talks through what to take from it and proposes test cases. Nothing is written until they are approved.
 - **Draft tests**: Claude Code writes test code for catalogue cases.
@@ -58,7 +59,7 @@ Real screens; app names and test details are blurred.
 | Web app | React and Vite UI, Express API |
 | Test tools | Playwright, Cypress, Jest and k6 |
 | Data | SQLite: sessions, results per tool, evidence and full history |
-| AI | Claude Code for spreadsheet import and drafting tests |
+| AI | Claude Code for spreadsheet import and drafting tests; Claude Sonnet as the eval judge |
 | Runs on | A Mac, started by Project Manager, with optional scheduled runs |
 
 ## Part of a pipeline
