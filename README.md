@@ -43,10 +43,16 @@ Real screens; app names and test details are blurred.
 | **Sessions**: every run with results per tool and the evidence behind each test | **Catalogue**: the app's test cases and their lifecycle |
 | ![Test history](screenshots/history.png) | ![Evals](screenshots/evals.png) |
 | **Test history**: one test followed across its runs, per tool | **Evals**: AI output quality scored 1 to 5 by an LLM judge, per criterion and per run |
+| ![Calibrate](screenshots/evals-calibrate.png) | |
+| **Calibrate**: a person scores items blind, then sees the judge's scores beside theirs | |
 
 ## Highlights
 
 - **Evals**: tests check the app works; evals check how good its AI output is. An LLM judge scores a random sample of real outputs against their source on a rubric per part (for example faithfulness, coverage, specificity), with a one-line reason for every score, and the averages are tracked run over run so a prompt or model change shows up as a number. Any app plugs in with a small config and adapter.
+  - **Fixed set**: every run judges the same items, so a score change means a quality change, not a different sample.
+  - **Calibrated judge**: a person scores a handful of items blind on the same rubric. After tightening the rubric, judge and human agree within 1 point on every score.
+  - **Prompt A/B**: the app regenerates the fixed set with a prompt change through an eval-only endpoint (nothing saved) and the result is judged against the baseline, so prompt changes ship on evidence, not gut feel.
+  - **Monthly drift check**: a scheduled run regenerates and judges the fixed set to catch model or prompt drift.
 - **Live view** streams the test browser while Playwright drives the app, and **Replay** steps through a finished test's trace.
 - **Import from spreadsheet**: Claude Code reads any test spreadsheet, talks through what to take from it and proposes test cases. Nothing is written until they are approved.
 - **Draft tests**: Claude Code writes test code for catalogue cases.
