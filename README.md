@@ -1,5 +1,7 @@
 # Test_Runner
 
+> Part of a larger agent platform. ▶ [Watch the 90-second overview](https://github.com/man-pi)
+
 Tests every app from one place. It runs Playwright, Cypress, Jest and k6 against an app and keeps every result with its history, so a failure shows how long it has been failing, not just that it failed. It also picks up tasks from MemoPile and reports each one back as Tested or Failed, and runs evals that score the quality of an app's AI output with an LLM judge.
 
 > **Source code is private.** This repository shows what Test_Runner does and how it is built. The code is available on request.
